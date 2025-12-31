@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financeiro - Heitor & Agatha</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Bibliotecas externas -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Finanças 💍</h2>
+                <!-- Botão que só aparece no celular -->
+                <button id="btn-menu-mobile" onclick="toggleMenu()">☰</button>
+            </div>
+
+            <!-- Div que vai sumir/aparecer no celular -->
+            <div id="sidebar-content" class="sidebar-mobile-hidden">
+                <div class="upload-section">
+                    <label>CSV Heitor:</label>
+                    <input type="file" id="csv-heitor" accept=".csv">
+
+                    <label>CSV Agatha:</label>
+                    <input type="file" id="csv-agatha" accept=".csv">
+
+                    <button id="btn-processar" onclick="processarArquivos()">Processar Arquivos 🚀</button>
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 20px 0;">
+
+                <nav>
+                    <button onclick="switchView('heitor')" id="btn-heitor">Heitor</button>
+                    <button onclick="switchView('agatha')" id="btn-agatha" style="margin-top: 5px;">Agatha</button>
+                    <button onclick="switchView('casal')" id="btn-casal" style="margin-top: 5px;">Casal</button>
+                </nav>
+            </div>
+        </aside>
+        <main class="content">
+            <header>
+                <h1 id="view-title">Visão Geral</h1>
+                <div class="header-controls">
+                    <select id="filter-period" onchange="updateUI()">
+                        <option value="all">Tudo</option>
+                        <option value="year">Este Ano</option>
+                        <option value="month">Este Mês</option>
+                        <option value="week">Esta Semana</option>
+                        <option value="day">Hoje</option>
+                    </select>
+                    <div class="search-bar">
+                        <input type="text" id="search" placeholder="Buscar..." oninput="updateUI()">
+                    </div>
+                </div>
+            </header>
+
+            <section class="stats">
+                <div class="card income">
+                    <h3>Entradas</h3>
+                    <p id="total-income">R$ 0,00</p>
+                </div>
+                <div class="card expense">
+                    <h3>Saídas</h3>
+                    <p id="total-expense">R$ 0,00</p>
+                </div>
+                <div class="card balance">
+                    <h3>Saldo</h3>
+                    <p id="total-balance">R$ 0,00</p>
+                </div>
+            </section>
+            <section class="charts-area">
+                <div class="main-chart-container">
+                    <h3>Resumo despesas</h3>
+                    <div class="canvas-wrapper">
+                        <canvas id="mainChart"></canvas>
+                    </div>
+                </div>
+                <div id="sub-charts-container" class="sub-charts-grid">
+                    <!-- JS vai criar os mini-gráficos aqui -->
+                </div>
+            </section>
+
+            <section class="transactions">
+                <h3>Transações</h3>
+                <div class="table-container">
+                    <table id="transaction-table">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Descrição</th>
+                                <th>Categoria</th>
+                                <th>Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body">
+                            <!-- JS vai preencher aqui -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script type="module" src="script.js"></script>
+</body>
+
+</html>
