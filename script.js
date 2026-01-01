@@ -227,15 +227,15 @@ function updateUI() {
         }
 
         if (periodo === 'week') {
-            // Considera os últimos 7 dias
             const umaSemanaAtras = new Date();
             umaSemanaAtras.setDate(agora.getDate() - 7);
+            umaSemanaAtras.setHours(0, 0, 0, 0); // Zera as horas para comparar apenas datas
             return dataItem >= umaSemanaAtras && dataItem <= agora;
         }
 
         if (periodo === 'month') {
             return dataItem.getMonth() === agora.getMonth() &&
-                dataItem.getFulflYear() === agora.getFullYear();
+                dataItem.getFullYear() === agora.getFullYear();
         }
 
         if (periodo === 'year') {
